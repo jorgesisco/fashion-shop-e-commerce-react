@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { HeaderData_1, HeaderData_2, BurgerIcon } from '../data/Header_data';
+import { HeaderData_2, BurgerIcon, Burger_Items } from '../data/Header_data';
+import Dropdown from './Dropdown';
+function Header({ click, handleClick, closeBurger }) {
+  //
 
-function Header() {
   return (
-    <Container>
-      <Logo>FASHION SHOP</Logo>
+    <Container onClick={closeBurger}>
+      <Link to='/' style={{ textDecoration: 'none' }}>
+        <Logo>FASHION SHOP</Logo>
+      </Link>
+
       <NavItems>
         {HeaderData_2.map((item) => (
           <NavItem>{item.text}</NavItem>
         ))}
       </NavItems>
-      {BurgerIcon.map((item) => (
-        <Burger>{item.text}</Burger>
-      ))}
+
+      <BurgerContainer>
+        {!click ? (
+          Burger_Items.map((item) => <BurgerItem>{item.text}</BurgerItem>)
+        ) : (
+          <></>
+        )}
+      </BurgerContainer>
+
+      <Burger onClick={handleClick}>
+        {BurgerIcon.map((item) => (
+          <div>{click ? item.burger : item.burger_open}</div>
+        ))}
+      </Burger>
     </Container>
   );
 }
@@ -24,11 +41,15 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 60px 0px 0px 75px;
+  padding: 30px 0px 30px 75px;
+  background: #70543f;
+  color: #ffeeee;
 `;
 
 const Logo = styled.div`
   cursor: pointer;
+  color: #ffeeee;
+
   font-size: 22px;
 `;
 
@@ -44,14 +65,56 @@ const NavItems = styled.div`
 `;
 
 const NavItem = styled.div`
-  margin-right: 40px;
+  margin-right: 30px;
   cursor: pointer;
+  transition: opacity 0.3s;
+  padding: 10px 20px;
+  transition: 0.8s;
+  border-radius: 15px;
+
+  :hover {
+    background: rgba(255, 238, 238, 0.15);
+    box-shadow: 0px 0px 3px rgba(255, 238, 238, 1);
+  }
 `;
 
 const Burger = styled.div`
   margin-right: 90px;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 12px;
   cursor: pointer;
-  @media (min-width: 820px) {
+  @media (min-width: 821px) {
     display: none;
   }
 `;
+
+const BurgerContainer = styled.div`
+  position: absolute;
+  top: 120px;
+  right: 80px;
+  border-radius: 20px;
+  background: rgba(112, 84, 63, 0.9);
+
+  @media (min-width: 820px) {
+    display: none;
+    background: #ffeeee;
+  }
+`;
+
+const BurgerItem = styled.div`
+  padding: 15px;
+  display: flex;
+  cursor: pointer;
+  color: #ffeeee;
+  padding: 15px 100px 20px 20px;
+  transition: 0.8s;
+
+  :hover {
+    background: rgba(255, 238, 238, 0.15);
+    box-shadow: 0px 0px 3px rgba(255, 238, 238, 1);
+  }
+`;
+
+const ItemContainer = styled.div``;

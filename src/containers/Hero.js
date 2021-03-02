@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Hero() {
+function Hero({ closeBurger }) {
   return (
-    <div>
+    <div onClick={closeBurger}>
       <h1>Hero</h1>
     </div>
   );
