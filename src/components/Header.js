@@ -1,34 +1,53 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { HeaderData_2, BurgerIcon, Burger_Items } from '../data/Header_data';
-import Dropdown from './Dropdown';
-function Header({ click, handleClick, closeBurger }) {
+
+function Header({
+  click_burger,
+  handleClick_burger,
+  closeBurger,
+  click_user,
+  handleClick_User,
+}) {
   //
 
   return (
-    <Container onClick={closeBurger}>
-      <Link to='/' style={{ textDecoration: 'none' }}>
+    <Container>
+      <Link onClick={closeBurger} to='/' style={{ textDecoration: 'none' }}>
         <Logo>FASHION SHOP</Logo>
       </Link>
 
       <NavItems>
         {HeaderData_2.map((item) => (
-          <NavItem>{item.text}</NavItem>
+          <Route>
+            <Link style={{ textDecoration: 'none' }} to={item.link}>
+              <NavItem>{item.text}</NavItem>
+            </Link>
+          </Route>
         ))}
       </NavItems>
 
-      <BurgerContainer>
-        {!click ? (
-          Burger_Items.map((item) => <BurgerItem>{item.text}</BurgerItem>)
+      <UserContainer>{!click_user ? 'LAN LAN LAN' : <></>}</UserContainer>
+
+      <BurgerContainer onClick={closeBurger}>
+        {!click_burger ? (
+          HeaderData_2.map((item) => (
+            <Route>
+              <Link to={item.link}>
+                <BurgerItem>{item.text}</BurgerItem>
+              </Link>
+            </Route>
+          ))
         ) : (
           <></>
         )}
       </BurgerContainer>
 
-      <Burger onClick={handleClick}>
+      <Burger onClick={handleClick_burger}>
         {BurgerIcon.map((item) => (
-          <div>{click ? item.burger : item.burger_open}</div>
+          <div>{click_burger ? item.burger : item.burger_open}</div>
         ))}
       </Burger>
     </Container>
@@ -71,6 +90,8 @@ const NavItem = styled.div`
   padding: 10px 20px;
   transition: 0.8s;
   border-radius: 15px;
+  text-decoration: none;
+  color: #ffeeee;
 
   :hover {
     background: rgba(255, 238, 238, 0.15);
@@ -117,4 +138,4 @@ const BurgerItem = styled.div`
   }
 `;
 
-const ItemContainer = styled.div``;
+const UserContainer = styled.div``;
