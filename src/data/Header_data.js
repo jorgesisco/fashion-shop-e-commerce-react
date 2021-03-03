@@ -3,7 +3,6 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
 import CloseIcon from '@material-ui/icons/Close';
-import handleClick_User from '../App';
 
 export const HeaderData_1 = [
   {

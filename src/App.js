@@ -34,9 +34,9 @@ function App() {
         <Header
           click_burger={click_burger}
           handleClick_burger={() => setClick_burger(!click_burger)}
+          closeBurger={closeBurger}
           click_user={clickUser}
           handleClick_User={() => setClickUser(!clickUser)}
-          closeBurger={closeBurger}
         />
         <Route path='/search'>
           <Search />

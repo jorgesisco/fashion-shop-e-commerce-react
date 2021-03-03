@@ -24,6 +24,7 @@ function Header({
           <Route>
             <Link style={{ textDecoration: 'none' }} to={item.link}>
               <NavItem>{item.text}</NavItem>
+              {console.log(item.text)}
             </Link>
           </Route>
         ))}
@@ -75,16 +76,15 @@ const Logo = styled.div`
 const NavItems = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 60px;
-  padding: 0;
-
+  right: 20px;
+  position: absolute;
   @media (max-width: 820px) {
     display: none;
   }
 `;
 
 const NavItem = styled.div`
-  margin-right: 30px;
+  margin-right: 20px;
   cursor: pointer;
   transition: opacity 0.3s;
   padding: 10px 20px;
