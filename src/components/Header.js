@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { HeaderData_2, BurgerIcon, Burger_Items } from '../data/Header_data';
+import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 
 function Header({
   click_burger,
@@ -23,21 +24,36 @@ function Header({
         {HeaderData_2.map((item) => (
           <Route>
             <Link style={{ textDecoration: 'none' }} to={item.link}>
-              <NavItem>{item.text}</NavItem>
-              {console.log(item.text)}
+              {<NavItem>
+                <PersonOutlinedIcon />
+              </NavItem> ? (
+                <NavItem onClick={handleClick_User}>{item.text}</NavItem>
+              ) : (
+                <NavItem>{item.text}</NavItem>
+              )}
             </Link>
           </Route>
         ))}
       </NavItems>
 
-      <UserContainer>{!click_user ? 'LAN LAN LAN' : <></>}</UserContainer>
+      <UserContainer>
+        {!click_user ? console.log('NOJODAAAAA') : <></>}
+      </UserContainer>
 
       <BurgerContainer onClick={closeBurger}>
         {!click_burger ? (
           HeaderData_2.map((item) => (
             <Route>
-              <Link to={item.link}>
-                <BurgerItem>{item.text}</BurgerItem>
+              <Link className='link' to={item.link}>
+                {<BurgerItem>
+                  <PersonOutlinedIcon />
+                </BurgerItem> ? (
+                  <BurgerItem onClick={handleClick_User}>
+                    {item.text}
+                  </BurgerItem>
+                ) : (
+                  <BurgerItem>{item.text}</BurgerItem>
+                )}
               </Link>
             </Route>
           ))
@@ -116,8 +132,9 @@ const BurgerContainer = styled.div`
   top: 120px;
   right: 80px;
   border-radius: 20px;
-  background: rgba(112, 84, 63, 0.9);
+  background: rgba(255, 238, 238, 0.95);
 
+  z-index: 100;
   @media (min-width: 820px) {
     display: none;
     background: #ffeeee;
@@ -127,10 +144,12 @@ const BurgerContainer = styled.div`
 const BurgerItem = styled.div`
   padding: 15px;
   display: flex;
+  text-decoration: none !important;
   cursor: pointer;
-  color: #ffeeee;
+  color: rgba(112, 84, 63, 1);
   padding: 15px 100px 20px 20px;
   transition: 0.8s;
+  text-decoration: none;
 
   :hover {
     background: rgba(255, 238, 238, 0.15);

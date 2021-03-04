@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { styled } from '@material-ui/core';
 
 import Hero from './containers/Hero';
-import Search from './components/Pages/Search';
-import Products from './components/Pages/Products';
-import User from './components/Pages/User';
-import Cart from './components/Pages/Cart';
+import Search from './Pages/Search';
+import Products from './Pages/Products';
+import User from './Pages/User';
+import Cart from './Pages/Cart';
 
 function App() {
   //Creating useState for burger icon and dropdown menu!
