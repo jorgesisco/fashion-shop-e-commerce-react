@@ -7,7 +7,9 @@ import img_3_2 from '../assets/images/ProductsImgs/img-3-2.jpg';
 import img_4_1 from '../assets/images/ProductsImgs/img-4-2.jpg';
 import img_4_2 from '../assets/images/ProductsImgs/img-4-2.jpg';
 
-const ProductData = [
+//ProductData
+
+const FeaturedProducts = [
   {
     title: 'Outfits for men',
     description:
@@ -43,4 +45,6 @@ const ProductData = [
   },
 ];
 
-export default ProductData;
+const SectionLeftProducts = [{}];
+
+export default FeaturedProducts;

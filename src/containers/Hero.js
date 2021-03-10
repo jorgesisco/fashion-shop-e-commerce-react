@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ProductData from '../data/ProductData';
+import FeaturedProducts from '../data/ProductData';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 function Hero({ closeBurger, closeUserMenu }) {
+  // useState function that lets me set current
+  // to show looped products on hero function
+
   const [current, setCurrent] = useState(0);
-  const length = ProductData.length;
+  const length = FeaturedProducts.length;
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
@@ -15,9 +18,10 @@ function Hero({ closeBurger, closeUserMenu }) {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  if (!Array.isArray(ProductData) || ProductData.length <= 0) {
+  if (!Array.isArray(FeaturedProducts) || FeaturedProducts.length <= 0) {
     return null;
-  }
+  } //In case there are not products in the data base,
+  //  it won't show the hero section!!!
 
   return (
     <Container onClick={closeBurger} onClick={closeUserMenu}>
@@ -27,14 +31,14 @@ function Hero({ closeBurger, closeUserMenu }) {
       </Arrows>
 
       <ProductItem className='item-circle'>
-        {ProductData.map((item, index) => (
+        {FeaturedProducts.map((item, index) => (
           <FiberManualRecordIcon
             className={index === current ? 'icon-current' : 'icon'}
           />
         ))}
       </ProductItem>
 
-      {ProductData.map((item, index) => (
+      {FeaturedProducts.map((item, index) => (
         <Product
           className={index === current ? 'slide-active' : 'slide'}
           key={index}
@@ -127,13 +131,14 @@ const ProductImg = styled.div`
   border-radius: 15px;
   margin-left: 50px;
   margin-right: 10px;
-  padding: 5px 5px 0px 5px;
+  padding: 5px 5px 5px 5px;
 
   img {
     max-width: 100%;
     height: auto;
     max-height: 500px;
     margin-bottom: -4px;
+    border-radius: 15px;
   }
 `;
 
