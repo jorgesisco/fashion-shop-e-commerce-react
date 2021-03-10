@@ -1,16 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProductData from '../data/ProductData';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-function Hero({ closeBurger }) {
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+function Hero({ closeBurger, closeUserMenu }) {
+  const [current, setCurrent] = useState(0);
+  const length = ProductData.length;
+
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
+  };
+
+  if (!Array.isArray(ProductData) || ProductData.length <= 0) {
+    return null;
+  }
+
   return (
-    <Container onClick={closeBurger}>
-      <Arrows>
-        <ArrowForwardIosIcon className='left' />
-        <ArrowForwardIosIcon className='right' />
+    <Container onClick={closeBurger} onClick={closeUserMenu}>
+      <Arrows onClick={closeBurger}>
+        <ArrowForwardIosIcon className='left' onClick={prevSlide} />
+        <ArrowForwardIosIcon className='right' onClick={nextSlide} />
       </Arrows>
-      {ProductData.map((item) => (
-        <Product>
+
+      <ProductItem className='item-circle'>
+        {ProductData.map((item, index) => (
+          <FiberManualRecordIcon
+            className={index === current ? 'icon-current' : 'icon'}
+          />
+        ))}
+      </ProductItem>
+
+      {ProductData.map((item, index) => (
+        <Product
+          className={index === current ? 'slide-active' : 'slide'}
+          key={index}
+          onClick={closeBurger}
+        >
           {item.img.map((image) => (
             <ProductImg>
               <img src={Object.values(image)[0]} />
@@ -24,7 +53,7 @@ function Hero({ closeBurger }) {
 
             {item.img.map((image) => (
               <ImgGalery>
-                <img src={Object.values(image)[0]} />
+                <img src={Object.values(image)[1]} />
               </ImgGalery>
             ))}
 
@@ -46,6 +75,10 @@ const Container = styled.div`
   display: flex;
   color: #ffeeee;
   position: relative;
+
+  .slide {
+    display: none;
+  }
 `;
 
 const Arrows = styled.div`
@@ -90,16 +123,16 @@ const Arrows = styled.div`
 `;
 
 const ProductImg = styled.div`
-  padding: 0px;
   border: 2px solid rgba(217, 200, 180, 0.75);
   border-radius: 15px;
   margin-left: 50px;
   margin-right: 10px;
+  padding: 5px 5px 0px 5px;
 
   img {
     max-width: 100%;
     height: auto;
-    max-height: 700px;
+    max-height: 500px;
     margin-bottom: -4px;
   }
 `;
@@ -143,11 +176,10 @@ const Description = styled.p`
   margin-top: 40px;
   font-size: 20px;
   font-weight: 600;
-
- 
-   @media (max-width: 1000px) {
+  @media (max-width: 1000px) {
     font-size: 18px;
-    @media (max-width: 820px) {
+  }
+  @media (max-width: 820px) {
     font-size: 15px;
   }
   @media (max-width: 730px) {
@@ -178,7 +210,7 @@ const ImgGalery = styled.div`
     height: auto;
     border: 2px solid rgba(217, 200, 180, 0.75);
     border-radius: 15px;
-    padding: 5px 5px 0px 0px;
+    padding: 2px 2px 2px 2px;
     transition: ease-in-out 0.15s;
     cursor: pointer;
     :hover {
@@ -207,5 +239,25 @@ const BuyButton = styled.button`
     background: rgba(255, 238, 238, 0.15);
     border: solid 1px rgba(255, 238, 238, 1);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+`;
+
+const ProductItem = styled.div`
+  position: absolute;
+  margin-right: 30px;
+  margin-bottom: 15px;
+  bottom: 0;
+  right: 0;
+
+  .icon {
+    cursor: pointer;
+    z-index: 0;
+  }
+
+  .icon-current {
+    border: 1px solid white;
+    border-radius: 50%;
+    margin-right: 5px;
+    cursor: pointer;
   }
 `;

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { HeaderData_2, BurgerIcon, Burger_Items } from '../data/Header_data';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 
 function Header({
   click_burger,
-  handleClick_burger,
+  troggle_burger,
   closeBurger,
   click_user,
-  handleClick_User,
+  troggle_user_menu,
 }) {
   //
 
@@ -27,7 +27,7 @@ function Header({
               {<NavItem>
                 <PersonOutlinedIcon />
               </NavItem> ? (
-                <NavItem onClick={handleClick_User}>{item.text}</NavItem>
+                <NavItem onClick={troggle_burger}>{item.text}</NavItem>
               ) : (
                 <NavItem>{item.text}</NavItem>
               )}
@@ -48,7 +48,7 @@ function Header({
                 {<BurgerItem>
                   <PersonOutlinedIcon />
                 </BurgerItem> ? (
-                  <BurgerItem onClick={handleClick_User}>
+                  <BurgerItem onClick={troggle_user_menu}>
                     {item.text}
                   </BurgerItem>
                 ) : (
@@ -62,7 +62,7 @@ function Header({
         )}
       </BurgerContainer>
 
-      <Burger onClick={handleClick_burger}>
+      <Burger onClick={troggle_burger}>
         {BurgerIcon.map((item) => (
           <div>{click_burger ? item.burger : item.burger_open}</div>
         ))}
