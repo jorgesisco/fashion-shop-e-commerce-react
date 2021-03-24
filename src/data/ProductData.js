@@ -45,6 +45,16 @@ const FeaturedProducts = [
   },
 ];
 
-const SectionLeftProducts = [{}];
+// const SectionLeftProducts = [
+//   {
+//     title: 'Outfits for men',
+//     description:
+//       'Casual  line, Short design. 100% suede leather. Elbow patche.',
+//     price: '$299.99',
+//     oldPrice: '499.99',
+//     img: [{ img1: img_1_1, img2: img_1_2 }],
+//     category: 'Leathers',
+//   }
+// ];
 
 export default FeaturedProducts;

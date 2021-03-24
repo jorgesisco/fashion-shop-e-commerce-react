@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-// import { styled } from '@material-ui/core';
-
 import Hero from './containers/Hero';
+import SectionLeft from './containers/SectionLeft';
 import Search from './Pages/Search';
 import Products from './Pages/Products';
 import User from './Pages/User';
 import Cart from './Pages/Cart';
+// import {
+//   getProducts,
+//   postProducts,
+//   putProducts,
+//   delProducts,
+//   leftProducts,
+// } from './data/Server';
+import axios from 'axios';
 
 function App() {
   //Creating useState for burger icon and dropdown menu!
@@ -20,6 +27,41 @@ function App() {
   const [click_User, setClickUser] = useState(true);
   const troggle_user_menu = () => setClickUser(false);
   const closeUserMenu = () => setClickUser(true);
+
+  //TOMMY SORRY FOR THE MESSY CODE HERE.. BELOW THIS LINE IS THE CODE THAT
+  // i AM TRYING TO DISPLAY IN SectionLeft COMPONENET AS A PROP
+
+  const [responseData, setResponseData] = useState('');
+  const [isLoading, setisLoading] = useState(true);
+
+  // const leftProducts = [];
+
+  axios.defaults.baseURL = 'https://6059f463b11aba001745d2fe.mockapi.io';
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get('/products');
+        const allProducts = res.data;
+        setResponseData(allProducts[0].name);
+        setisLoading(false);
+        // setResponseData(allProducts);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProducts();
+  });
+
+  // const getProducts = () => {
+  //   axios
+  //     .get('/products')
+  //     .then((res) => {
+  //       const allProducts = res.data;
+  //       setResponseData(allProducts.map((i) => i));
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   document.addEventListener('keyup', (e) => {
     if (e.key === 'Escape') {
@@ -53,6 +95,13 @@ function App() {
         </Route>
         <Route path='//'>
           <Hero closeBurger={closeBurger} closeUserMenu={closeUserMenu} />
+        </Route>
+        <Route path='//'>
+          <SectionLeft
+            closeBurger={closeBurger}
+            closeUserMenu={closeUserMenu}
+            title={setResponseData}
+          />
         </Route>
       </Router>
     </div>
