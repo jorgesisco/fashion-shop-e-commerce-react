@@ -1,15 +1,28 @@
 // import { Description } from '@material-ui/icons';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-function SectionLeft({ title, description, price }) {
+function SectionLeft({
+  title,
+  description,
+  price,
+  id,
+  productsData,
+  nextSlide,
+  prevSlide,
+}) {
+  if (!Array.isArray(productsData) || productsData.length <= 0) {
+    return null;
+  }
+
   return (
     <Container>
       <Arrows>
-        <ArrowForwardIosIcon className='left' />
-        <ArrowForwardIosIcon className='right' />
+        <ArrowForwardIosIcon className='left' onClick={prevSlide} />
+        <ArrowForwardIosIcon className='right' onClick={nextSlide} />
       </Arrows>
+
       <ProductItem></ProductItem>
       <LeftProducts>
         <ProductImg></ProductImg>

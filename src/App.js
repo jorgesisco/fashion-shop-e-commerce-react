@@ -8,14 +8,7 @@ import Search from './Pages/Search';
 import Products from './Pages/Products';
 import User from './Pages/User';
 import Cart from './Pages/Cart';
-// import {
-//   getProducts,
-//   postProducts,
-//   putProducts,
-//   delProducts,
-//   leftProducts,
-// } from './data/Server';
-import axios from 'axios';
+import axios from './data/axios';
 
 function App() {
   //Creating useState for burger icon and dropdown menu!
@@ -28,41 +21,34 @@ function App() {
   const troggle_user_menu = () => setClickUser(false);
   const closeUserMenu = () => setClickUser(true);
 
-  //TOMMY SORRY FOR THE MESSY CODE HERE.. BELOW THIS LINE IS THE CODE THAT
-  // i AM TRYING TO DISPLAY IN SectionLeft COMPONENET AS A PROP
-
-  const [responseData, setResponseData] = useState('');
-  const [isLoading, setisLoading] = useState(true);
-
-  // const leftProducts = [];
-
-  axios.defaults.baseURL = 'https://6059f463b11aba001745d2fe.mockapi.io';
+  // UseStates for API calls using Axios
+  const [productsData, setproductsData] = useState(); // For product data
+  const [current, setCurrent] = useState(0); // for slides in the left component
+  const [dataLength, setdataLength] = useState(0); //length data for the slides functions
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await axios.get('/products');
-        const allProducts = res.data;
-        setResponseData(allProducts[0].name);
-        setisLoading(false);
-        // setResponseData(allProducts);
-      } catch (err) {
-        console.log(err);
-      }
+    //Api call using axios to get product data
+    const fetchData = async () => {
+      const request = await axios.get('/products');
+      setproductsData(request.data);
+      setdataLength(request.data.length);
+      setCurrent(0);
+      return request.data;
     };
-    getProducts();
-  });
+    fetchData();
+    setCurrent();
+  }, []);
+  // console.log(length);
 
-  // const getProducts = () => {
-  //   axios
-  //     .get('/products')
-  //     .then((res) => {
-  //       const allProducts = res.data;
-  //       setResponseData(allProducts.map((i) => i));
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+  //Functions for the slides in SectionLeft component
+  const nextSlide = () => {
+    setCurrent(current === dataLength - 1 ? 0 : current + 1);
+  };
+  const prevSlide = () => {
+    setCurrent(current === 0 ? dataLength - 1 : current - 1);
+  };
 
+  //Event listener for the esc key to be able to close the dropdown menu
   document.addEventListener('keyup', (e) => {
     if (e.key === 'Escape') {
       closeBurger();
@@ -97,11 +83,25 @@ function App() {
           <Hero closeBurger={closeBurger} closeUserMenu={closeUserMenu} />
         </Route>
         <Route path='//'>
-          <SectionLeft
-            closeBurger={closeBurger}
-            closeUserMenu={closeUserMenu}
-            title={setResponseData}
-          />
+          {!productsData ? (
+            <p>Loading</p>
+          ) : (
+            productsData.map((i, index) =>
+              current === index ? (
+                <SectionLeft
+                  closeBurger={closeBurger}
+                  closeUserMenu={closeUserMenu}
+                  title={i.name}
+                  description={i.description}
+                  price={i.price}
+                  id={i.id}
+                  productsData={productsData}
+                  nextSlide={nextSlide}
+                  prevSlide={prevSlide}
+                />
+              ) : null
+            )
+          )}
         </Route>
       </Router>
     </div>
