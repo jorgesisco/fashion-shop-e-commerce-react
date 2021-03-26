@@ -3,16 +3,17 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-function SectionLeft({
+function Section({
   title,
   description,
   price,
   id,
-  productsData,
+  ProductsData,
   nextSlide,
   prevSlide,
+  image,
 }) {
-  if (!Array.isArray(productsData) || productsData.length <= 0) {
+  if (!Array.isArray(ProductsData) || ProductsData.length <= 0) {
     return null;
   }
 
@@ -25,7 +26,7 @@ function SectionLeft({
 
       <ProductItem></ProductItem>
       <LeftProducts>
-        <ProductImg></ProductImg>
+        <ProductImg src={image}></ProductImg>
         <ProductInfo>
           <Title>{title}</Title>
           <Description>{description}</Description>
@@ -36,15 +37,18 @@ function SectionLeft({
   );
 }
 
-export default SectionLeft;
+export default Section;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  background: yellow;
+  border: 1px solid black;
+`;
 
 const Arrows = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   height: 550px;
   width: 100%;
 
@@ -82,7 +86,7 @@ const Arrows = styled.div`
 `;
 const ProductItem = styled.div``;
 const LeftProducts = styled.div``;
-const ProductImg = styled.div``;
+const ProductImg = styled.img``;
 const ProductInfo = styled.div``;
 const Title = styled.h1``;
 const Description = styled.p``;

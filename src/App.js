@@ -3,13 +3,13 @@ import './App.css';
 import Header from './components/Header';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Hero from './containers/Hero';
-import SectionLeft from './containers/SectionLeft';
+import Section from './containers/Section';
 import Search from './Pages/Search';
 import Products from './Pages/Products';
 import User from './Pages/User';
 import Cart from './Pages/Cart';
 import axios from './data/axios';
-
+import styled from 'styled-components';
 function App() {
   //Creating useState for burger icon and dropdown menu!
   const [click_burger, setClick_burger] = useState(true);
@@ -22,30 +22,56 @@ function App() {
   const closeUserMenu = () => setClickUser(true);
 
   // UseStates for API calls using Axios
-  const [productsData, setproductsData] = useState(); // For product data
-  const [current, setCurrent] = useState(0); // for slides in the left component
-  const [dataLength, setdataLength] = useState(0); //length data for the slides functions
+  const [leftProductsData, setleftProductsData] = useState(); // For product data
+  const [leftCurrent, setleftCurrent] = useState(0); // for slides in the left component
+  const [leftDataLength, setleftDataLength] = useState(0); //length data for the slides functions
+
+  const [rightProductsData, setrightProductsData] = useState(); // For product data
+  const [rightCurrent, setrightCurrent] = useState(0); // for slides in the right component
+  const [rightDataLength, setrightDataLength] = useState(0); //length data for the slides functions
 
   useEffect(() => {
     //Api call using axios to get product data
-    const fetchData = async () => {
-      const request = await axios.get('/products');
-      setproductsData(request.data);
-      setdataLength(request.data.length);
-      setCurrent(0);
-      return request.data;
+    const leftFetchData = async () => {
+      const leftRequest = await axios.get('leftProducts');
+      setleftProductsData(leftRequest.data);
+      setleftDataLength(leftRequest.data.length);
+      setleftCurrent(0);
+      return leftRequest.data;
     };
-    fetchData();
-    setCurrent();
+
+    const rightFetchData = async () => {
+      const rightRequest = await axios.get('rightProducts');
+      setrightProductsData(rightRequest.data);
+      setrightDataLength(rightRequest.data.length);
+      setrightCurrent(0);
+      return rightRequest.data;
+    };
+
+    leftFetchData();
+    setleftCurrent();
+
+    rightFetchData();
+    setrightCurrent();
   }, []);
-  // console.log(length);
 
   //Functions for the slides in SectionLeft component
-  const nextSlide = () => {
-    setCurrent(current === dataLength - 1 ? 0 : current + 1);
+  const leftNextSlide = () => {
+    setleftCurrent(leftCurrent === leftDataLength - 1 ? 0 : leftCurrent + 1);
   };
-  const prevSlide = () => {
-    setCurrent(current === 0 ? dataLength - 1 : current - 1);
+  const rightNextSlide = () => {
+    setrightCurrent(
+      rightCurrent === rightDataLength - 1 ? 0 : rightCurrent + 1
+    );
+  };
+
+  const leftPrevSlide = () => {
+    setleftCurrent(leftCurrent === 0 ? leftDataLength - 1 : leftCurrent - 1);
+  };
+  const rightPrevSlide = () => {
+    setrightCurrent(
+      rightCurrent === 0 ? rightDataLength - 1 : rightCurrent - 1
+    );
   };
 
   //Event listener for the esc key to be able to close the dropdown menu
@@ -82,30 +108,59 @@ function App() {
         <Route path='//'>
           <Hero closeBurger={closeBurger} closeUserMenu={closeUserMenu} />
         </Route>
-        <Route path='//'>
-          {!productsData ? (
-            <p>Loading</p>
-          ) : (
-            productsData.map((i, index) =>
-              current === index ? (
-                <SectionLeft
-                  closeBurger={closeBurger}
-                  closeUserMenu={closeUserMenu}
-                  title={i.name}
-                  description={i.description}
-                  price={i.price}
-                  id={i.id}
-                  productsData={productsData}
-                  nextSlide={nextSlide}
-                  prevSlide={prevSlide}
-                />
-              ) : null
-            )
-          )}
-        </Route>
+        <SectionContainer>
+          <Route path='//'>
+            {!leftProductsData ? (
+              <p>Loading</p>
+            ) : (
+              leftProductsData.map((i, index) =>
+                leftCurrent === index ? (
+                  <Section
+                    closeBurger={closeBurger}
+                    closeUserMenu={closeUserMenu}
+                    image={i.img}
+                    title={i.name}
+                    description={i.description}
+                    price={i.price}
+                    id={i.id}
+                    ProductsData={leftProductsData}
+                    nextSlide={leftNextSlide}
+                    prevSlide={leftPrevSlide}
+                  />
+                ) : null
+              )
+            )}
+          </Route>
+          <Route path='//'>
+            {!rightProductsData ? (
+              <p>Loading</p>
+            ) : (
+              rightProductsData.map((i, index) =>
+                rightCurrent === index ? (
+                  <Section
+                    image={i.img}
+                    title={i.name}
+                    description={i.description}
+                    price={i.price}
+                    id={i.id}
+                    ProductsData={rightProductsData}
+                    nextSlide={rightNextSlide}
+                    prevSlide={rightPrevSlide}
+                  />
+                ) : null
+              )
+            )}
+          </Route>
+        </SectionContainer>
       </Router>
     </div>
   );
 }
 
 export default App;
+
+const SectionContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+`;
