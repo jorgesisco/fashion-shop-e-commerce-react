@@ -126,6 +126,8 @@ function App() {
                     ProductsData={leftProductsData}
                     nextSlide={leftNextSlide}
                     prevSlide={leftPrevSlide}
+                    ProductsSide={1}
+                    className='leftC'
                   />
                 ) : null
               )
@@ -162,5 +164,5 @@ export default App;
 const SectionContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
+  align-items: center;
 `;
