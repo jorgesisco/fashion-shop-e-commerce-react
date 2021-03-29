@@ -44,22 +44,22 @@ function Hero({ closeBurger, closeUserMenu }) {
           key={index}
           onClick={closeBurger}
         >
-          {item.img.map((image) => (
+          {/* {item.img.map((image) => (
             <ProductImg>
               <img src={Object.values(image)[0]} />
             </ProductImg>
-          ))}
+          ))} */}
 
           <ProductInfo>
             <Title>{item.title}</Title>
             <Description>{item.description}</Description>
             <Price>{item.price}</Price>
 
-            {item.img.map((image) => (
+            {/* {item.img.map((image) => (
               <ImgGalery>
                 <img src={Object.values(image)[1]} />
               </ImgGalery>
-            ))}
+            ))} */}
 
             <BuyButton>Buy Now</BuyButton>
           </ProductInfo>
