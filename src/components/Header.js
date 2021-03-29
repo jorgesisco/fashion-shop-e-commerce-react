@@ -22,51 +22,11 @@ function Header({
 
       <NavItems>
         {HeaderData_2.map((item) => (
-          <Route>
-            <Link style={{ textDecoration: 'none' }} to={item.link}>
-              {<NavItem>
-                <PersonOutlinedIcon />
-              </NavItem> ? (
-                <NavItem onClick={troggle_burger}>{item.text}</NavItem>
-              ) : (
-                <NavItem>{item.text}</NavItem>
-              )}
-            </Link>
-          </Route>
+          <Link style={{ textDecoration: 'none' }} to={item.link}>
+            <NavItem>{item.text}</NavItem>
+          </Link>
         ))}
       </NavItems>
-
-      <UserContainer>
-        {!click_user ? console.log('NOJODAAAAA') : <></>}
-      </UserContainer>
-
-      <BurgerContainer onClick={closeBurger}>
-        {!click_burger ? (
-          HeaderData_2.map((item) => (
-            <Route>
-              <Link className='link' to={item.link}>
-                {<BurgerItem>
-                  <PersonOutlinedIcon />
-                </BurgerItem> ? (
-                  <BurgerItem onClick={troggle_user_menu}>
-                    {item.text}
-                  </BurgerItem>
-                ) : (
-                  <BurgerItem>{item.text}</BurgerItem>
-                )}
-              </Link>
-            </Route>
-          ))
-        ) : (
-          <></>
-        )}
-      </BurgerContainer>
-
-      <Burger onClick={troggle_burger}>
-        {BurgerIcon.map((item) => (
-          <div>{click_burger ? item.burger : item.burger_open}</div>
-        ))}
-      </Burger>
     </Container>
   );
 }
@@ -114,47 +74,3 @@ const NavItem = styled.div`
     box-shadow: 0px 0px 3px rgba(255, 238, 238, 1);
   }
 `;
-
-const Burger = styled.div`
-  margin-right: 90px;
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  @media (min-width: 821px) {
-    display: none;
-  }
-`;
-
-const BurgerContainer = styled.div`
-  position: absolute;
-  top: 120px;
-  right: 80px;
-  border-radius: 20px;
-  background: rgba(255, 238, 238, 0.95);
-
-  z-index: 100;
-  @media (min-width: 820px) {
-    display: none;
-    background: #ffeeee;
-  }
-`;
-
-const BurgerItem = styled.div`
-  padding: 15px;
-  display: flex;
-  text-decoration: none !important;
-  cursor: pointer;
-  color: rgba(112, 84, 63, 1);
-  padding: 15px 100px 20px 20px;
-  transition: 0.8s;
-  text-decoration: none;
-
-  :hover {
-    background: rgba(255, 238, 238, 0.15);
-    box-shadow: 0px 0px 3px rgba(255, 238, 238, 1);
-  }
-`;
-
-const UserContainer = styled.div``;

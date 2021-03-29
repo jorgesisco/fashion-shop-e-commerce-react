@@ -4,32 +4,12 @@ import styled from 'styled-components';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
-function Section({
-  title,
-  description,
-  price,
-  id,
-  ProductsData,
-  nextSlide,
-  prevSlide,
-  image,
-  ProductsSide,
-}) {
-  if (!Array.isArray(ProductsData) || ProductsData.length <= 0) {
-    return null;
-  }
-
+function Section({ title, description, price }) {
   return (
-    <Container
-      style={
-        ProductsSide === 1
-          ? { background: '#D9C8B4', width: '50%' }
-          : { background: '#8E958D', width: '50%', 'flex-direction': 'column' }
-      }
-    >
+    <Container>
       <Arrows className='arrows'>
-        <ArrowForwardIosIcon className='left' onClick={prevSlide} />
-        <ArrowForwardIosIcon className='right' onClick={nextSlide} />
+        <ArrowForwardIosIcon className='left' />
+        <ArrowForwardIosIcon className='right' />
       </Arrows>
 
       <ProductItem>
@@ -41,7 +21,7 @@ function Section({
         <Description>{description}</Description>
         <Price>${price}</Price>
       </ProductInfo>
-      <ProductImg src={image}></ProductImg>
+      {/* <ProductImg src={image}></ProductImg> */}
     </Container>
   );
 }
@@ -57,16 +37,7 @@ const Container = styled.div`
   justify-content: space-evenly;
   color: #ffeeee;
   position: relative;
-  /* 
-  .arrows {
-    display: none;
-  }
-
-  :hover {
-    .arrows {
-      display: inherit;
-    }
-  } */
+  background: black;
 `;
 
 const Arrows = styled.div`
