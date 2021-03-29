@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
 
 export default class Products extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { addClass: false };
+  }
+  toggle() {
+    this.setState({ addClass: !this.state.addClass });
+  }
+
   render() {
+    let boxClass = ['cart-button'];
+    if (this.state.addClass) {
+      boxClass.push('clicked');
+    }
     return (
       <Container>
         <ULProducts className='products'>
-          {this.props.products.map((product) => (
+          {this.props.products.map((product, id) => (
             <LIproduct key={product.id}>
               <ProductContainer className='product'>
                 <Link to={'/' + product._id}>
@@ -16,7 +30,16 @@ export default class Products extends Component {
                 </Link>
                 <ProductPrice className='product-price'>
                   <div>{product.price}</div>
-                  <button className='button-primary'>Add to cart</button>
+                  <button
+                    id={id}
+                    className={boxClass.join(' ')}
+                    onClick={this.toggle.bind(this)}
+                  >
+                    <span className='add-to-cart'>Add to cart</span>
+                    <span className='added'>Added</span>
+                    <ShoppingCartIcon />
+                    <LocalMallIcon />
+                  </button>
                 </ProductPrice>
               </ProductContainer>
             </LIproduct>
@@ -36,50 +59,55 @@ const ULProducts = styled.ul`
   padding: 0;
   margin: 0;
   list-style-type: none;
-
-  li {
-    flex: 0 1 29rem;
-    height: 47rem;
-    padding: 1rem;
-    margin: 1rem;
+`;
+const LIproduct = styled.li`
+  /* flex: 2 1 10rem; */
+  height: 25rem;
+  /* width: 5rem; */
+  padding: 1rem 1rem 2rem 1rem;
+  margin: 2rem 2rem 2rem 0rem;
+  border: 1px solid yellow;
+  img {
+    height: 20rem;
+    border-radius: 15px;
   }
 `;
-const LIproduct = styled.li``;
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: space-arrond;
+  justify-content: space-between;
   height: 100%;
-  img {
-    max-width: 25srem;
-    max-height: 25rem;
+
+  p {
+    margin-top: 10px;
   }
 `;
 const ProductPrice = styled.div`
-  display: flex;
-  align-items: center;
+  margin-top: 10px;
 
-  div,
-  button {
-    text-align: center;
-    flex: 1;
-  }
-
-  div {
-    font-size: 2rem;
-  }
-
-  button {
-    padding: 1rem;
-    border: 1px solid #c0c0c0;
+  .cart-button {
+    position: relative;
+    padding: 10px;
+    width: 200px;
+    height: 60px;
+    border: 0;
+    border-radius: 10px;
+    background-color: rgba(255, 238, 238, 1);
     outline: none;
-    background-color: #ffeeee;
-    border-radius: 15px;
     cursor: pointer;
+    color: #70543f;
+    transition: 0.1s ease-in-out;
+  }
 
-    :hover {
-      border: 1px solid #808080;
-    }
+  .cart-button:hover {
+    background-color: rgba(255, 238, 238, 0.7);
+  }
+
+  .cart-button:active {
+    transform: scale(0.9);
+  }
+
+  .clicked {
+    background-color: red;
   }
 `;
