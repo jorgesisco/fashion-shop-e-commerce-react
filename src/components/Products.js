@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import AddToCart from './AddToCart';
-
+import formatCurrency from './util';
 export default class Products extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +30,7 @@ export default class Products extends Component {
                   <p>{product.title}</p>
                 </Link>
                 <ProductPrice className='product-price'>
-                  <div>${product.price}</div>
+                  <div>{formatCurrency(product.price)}</div>
 
                   <AddToCart />
                 </ProductPrice>
