@@ -30,7 +30,7 @@ export default class Products extends Component {
                   <p>{product.title}</p>
                 </Link>
                 <ProductPrice className='product-price'>
-                  <div>{product.price}</div>
+                  <div>${product.price}</div>
 
                   <AddToCart />
                 </ProductPrice>
@@ -43,7 +43,9 @@ export default class Products extends Component {
   }
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin-bottom: 2rem;
+`;
 const ULProducts = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -56,8 +58,9 @@ const ULProducts = styled.ul`
 const LIproduct = styled.li`
   height: 25rem;
   padding: 1rem 1rem 2rem 1rem;
-  margin: 2rem 2rem 2rem 0rem;
+  margin: 4rem 2rem 2rem 0rem;
   img {
+    width: auto;
     height: 20rem;
     border-radius: 15px;
   }
@@ -67,19 +70,21 @@ const ProductContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-
+  width: 230px;
   p {
     margin-top: 10px;
-    color: #ffeeee;
+    color: #70543f;
   }
 `;
 const ProductPrice = styled.div`
   margin-top: 10px;
+  color: #70543f;
 
   .cart-button {
+    margin-top: 15px;
     position: relative;
     padding: 10px;
-    width: 200px;
+    width: 250px;
     height: 60px;
     border: 0;
     border-radius: 10px;

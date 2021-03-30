@@ -27,7 +27,7 @@ const FeaturedProducts = [
     category: 'Leathers',
   },
   {
-    title: 'Most modern snikers for men',
+    title: 'Most modern sneakers for men',
     description: 'Most bought snikers this months!.',
     price: '$129',
     oldPrice: '179',

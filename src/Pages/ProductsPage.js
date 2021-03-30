@@ -19,8 +19,11 @@ class ProductsPage extends React.Component {
     return (
       <Container>
         <Header>
-          <Link style={{ 'text-decoration': 'none' }} to='/products'>
-            React Shoping Cart
+          <Link
+            style={{ 'text-decoration': 'none', color: '#70543f' }}
+            to='/products'
+          >
+            Our available products
           </Link>
         </Header>
         <Main>
@@ -49,7 +52,7 @@ const Container = styled.div`
   grid-template-rows: 5rem 1fr 5rem;
   grid-template-columns: 1fr;
   height: 100%;
-  background: #70543f;
+  /* background: #70543f; */
   /* border: 1px solid black; */
 `;
 const Header = styled.header`
