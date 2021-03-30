@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
+import AddToCart from './AddToCart';
 
 export default class Products extends Component {
   constructor(props) {
@@ -24,22 +25,14 @@ export default class Products extends Component {
           {this.props.products.map((product, id) => (
             <LIproduct key={product.id}>
               <ProductContainer className='product'>
-                <Link to={'/' + product._id}>
+                <Link style={{ textDecoration: 'none' }} to={'/' + product._id}>
                   <img src={product.image} alt={product.title}></img>
                   <p>{product.title}</p>
                 </Link>
                 <ProductPrice className='product-price'>
                   <div>{product.price}</div>
-                  <button
-                    id={id}
-                    className={boxClass.join(' ')}
-                    onClick={this.toggle.bind(this)}
-                  >
-                    <span className='add-to-cart'>Add to cart</span>
-                    <span className='added'>Added</span>
-                    <ShoppingCartIcon />
-                    <LocalMallIcon />
-                  </button>
+
+                  <AddToCart />
                 </ProductPrice>
               </ProductContainer>
             </LIproduct>
@@ -61,12 +54,9 @@ const ULProducts = styled.ul`
   list-style-type: none;
 `;
 const LIproduct = styled.li`
-  /* flex: 2 1 10rem; */
   height: 25rem;
-  /* width: 5rem; */
   padding: 1rem 1rem 2rem 1rem;
   margin: 2rem 2rem 2rem 0rem;
-  border: 1px solid yellow;
   img {
     height: 20rem;
     border-radius: 15px;
@@ -80,6 +70,7 @@ const ProductContainer = styled.div`
 
   p {
     margin-top: 10px;
+    color: #ffeeee;
   }
 `;
 const ProductPrice = styled.div`
@@ -107,7 +98,67 @@ const ProductPrice = styled.div`
     transform: scale(0.9);
   }
 
-  .clicked {
-    background-color: red;
+  .cart-button.clicked .cart-icon {
+    animation: cart 1.5s ease-in-out forwards;
+  }
+  .cart-button.clicked .box-icon {
+    animation: box 1.5s ease-in-out forwards;
+  }
+
+  .cart-button.clicked span.add-to-cart {
+    animation: txt1 1.5s ease-in-out forwards;
+  }
+  .cart-button.clicked span.added {
+    animation: txt2 1.5s ease-in-out forwards;
+  }
+
+  @keyframes cart {
+    0% {
+      left: -40%;
+      opacity: 1;
+    }
+    40%,
+    60% {
+      left: 50%;
+      opacity: 1;
+    }
+    100% {
+      left: 110%;
+      opacity: 0;
+    }
+  }
+  @keyframes box {
+    0% 40% {
+      top: -20%;
+      opacity: 1;
+    }
+    60% {
+      top: 40%;
+      left: 52%;
+      opacity: 1;
+    }
+    100% {
+      top: 40%;
+      left: 112%;
+      opacity: 0;
+    }
+  }
+  @keyframes txt1 {
+    0% {
+      opacity: 1;
+    }
+    20%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes txt2 {
+    0%,
+    80% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 `;
