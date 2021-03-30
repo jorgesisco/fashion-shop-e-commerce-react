@@ -4,6 +4,7 @@ import data from '../data/data.json';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Products from '../components/Products';
+import Filter from '../components/Filter';
 
 class ProductsPage extends React.Component {
   constructor() {
@@ -14,6 +15,42 @@ class ProductsPage extends React.Component {
       sort: '',
     };
   }
+
+  sortProducts = (event) => {
+    const sort = event.target.value;
+
+    this.setState((state) => ({
+      sort: sort,
+      products: this.state.products
+        .slice()
+        .sort((a, b) =>
+          sort === 'Lowest'
+            ? a.price > b.price
+              ? 1
+              : -1
+            : sort === 'Highest'
+            ? a.price < b.price
+              ? 1
+              : -1
+            : a._id > b._id
+            ? 1
+            : -1
+        ),
+    }));
+  };
+
+  filterProducts = (event) => {
+    if (event.target.value === '') {
+      this.setState({ size: event.target.value, products: data.products });
+    } else {
+      this.setState({
+        size: event.target.value,
+        products: data.products.filter(
+          (product) => product.availableSizes.indexOf(event.target.value) >= 0
+        ),
+      });
+    }
+  };
 
   render() {
     return (
@@ -29,6 +66,13 @@ class ProductsPage extends React.Component {
         <Main>
           <Content>
             <MainContent>
+              <Filter
+                count={this.state.products.length}
+                size={this.state.size}
+                sort={this.state.sort}
+                filterProducts={this.filterProducts}
+                sortProducts={this.sortProducts}
+              />
               <Products products={this.state.products} />
             </MainContent>
 

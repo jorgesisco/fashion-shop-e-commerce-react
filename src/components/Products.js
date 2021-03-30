@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
 import AddToCart from './AddToCart';
 import formatCurrency from './util';
 export default class Products extends Component {
