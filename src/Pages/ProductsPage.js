@@ -11,10 +11,13 @@ class ProductsPage extends React.Component {
     super();
     this.state = {
       products: data.products,
+      cartItems: [],
       size: '',
       sort: '',
     };
   }
+
+  addToCart = () => [];
 
   sortProducts = (event) => {
     const sort = event.target.value;

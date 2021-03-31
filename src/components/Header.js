@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BrowserRouter as Route } from 'react-router-dom';
+
 import styled from 'styled-components';
-import { HeaderData_2, BurgerIcon, Burger_Items } from '../data/Header_data';
-import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
+import { HeaderData_2 } from '../data/Header_data';
 
 function Header({
   click_burger,

@@ -1,5 +1,5 @@
 // import { Description } from '@material-ui/icons';
-import React, { useState, useEffect } from 'react';
+
 import styled from 'styled-components';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
@@ -101,21 +101,21 @@ const ProductItem = styled.div`
   }
 `;
 
-const ProductImg = styled.img`
-  border: 2px solid rgba(217, 200, 180, 0.75);
-  border-radius: 15px;
-  margin-left: 50px;
-  margin-right: 20px;
-  padding: 5px 5px 5px 5px;
-  max-width: 100%;
-  height: auto;
-  max-height: 200px;
+// const ProductImg = styled.img`
+//   border: 2px solid rgba(217, 200, 180, 0.75);
+//   border-radius: 15px;
+//   margin-left: 50px;
+//   margin-right: 20px;
+//   padding: 5px 5px 5px 5px;
+//   max-width: 100%;
+//   height: auto;
+//   max-height: 200px;
 
-  /* margin-left: 200px; */
-  /* max-height: auto; */
-  margin-bottom: -4px;
-  border-radius: 15px;
-`;
+//   /* margin-left: 200px; */
+//   /* max-height: auto; */
+//   margin-bottom: -4px;
+//   border-radius: 15px;
+// `;
 
 const ProductInfo = styled.div`
   display: flex;

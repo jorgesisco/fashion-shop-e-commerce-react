@@ -30,7 +30,7 @@ export default class Products extends Component {
                 <ProductPrice className='product-price'>
                   <div>{formatCurrency(product.price)}</div>
 
-                  <AddToCart />
+                  <AddToCart onClick={() => this.props.addToCart(product)} />
                 </ProductPrice>
               </ProductContainer>
             </LIproduct>
