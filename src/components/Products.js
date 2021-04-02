@@ -17,6 +17,7 @@ export default class Products extends Component {
     if (this.state.addClass) {
       boxClass.push('clicked');
     }
+
     return (
       <Container>
         <ULProducts className='products'>
@@ -30,7 +31,9 @@ export default class Products extends Component {
                 <ProductPrice className='product-price'>
                   <div>{formatCurrency(product.price)}</div>
 
-                  <AddToCart onClick={() => this.props.addToCart(product)} />
+                  <div onClick={() => this.props.addToCart(product)}>
+                    <AddToCart />
+                  </div>
                 </ProductPrice>
               </ProductContainer>
             </LIproduct>

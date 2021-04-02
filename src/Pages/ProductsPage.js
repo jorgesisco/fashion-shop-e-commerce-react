@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Products from '../components/Products';
 import Filter from '../components/Filter';
+import Cart from '../components/Cart';
 
 class ProductsPage extends React.Component {
   constructor() {
@@ -29,6 +30,12 @@ class ProductsPage extends React.Component {
     if (!alreadyInCart) {
       cartItems.push({ ...product, count: 1 });
     }
+
+    this.setState({ cartItems });
+  };
+
+  a = () => {
+    console.log('test');
   };
 
   sortProducts = (event) => {
@@ -88,10 +95,15 @@ class ProductsPage extends React.Component {
                 filterProducts={this.filterProducts}
                 sortProducts={this.sortProducts}
               />
-              <Products products={this.state.products} />
+              <Products
+                products={this.state.products}
+                addToCart={this.addToCart}
+              />
             </MainContent>
 
-            <Sidebar>Cart Items</Sidebar>
+            <Sidebar>
+              <Cart cartItems={this.state.cartItems} />
+            </Sidebar>
           </Content>
         </Main>
         <Footer className='footer' />
