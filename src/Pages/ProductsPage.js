@@ -17,7 +17,19 @@ class ProductsPage extends React.Component {
     };
   }
 
-  addToCart = () => [];
+  addToCart = (product) => {
+    const cartItems = this.state.cartItems.slice();
+    let alreadyInCart = false;
+    cartItems.forEach((item) => {
+      if (item.id === product._id) {
+        item.count++;
+        alreadyInCart = true;
+      }
+    });
+    if (!alreadyInCart) {
+      cartItems.push({ ...product, count: 1 });
+    }
+  };
 
   sortProducts = (event) => {
     const sort = event.target.value;
