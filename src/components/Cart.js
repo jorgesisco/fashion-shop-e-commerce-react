@@ -18,4 +18,9 @@ export default class Cart extends Component {
   }
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  .cart {
+  }
+  .cart-header {
+  }
+`;
