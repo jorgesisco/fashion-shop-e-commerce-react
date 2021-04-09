@@ -18,6 +18,13 @@ class ProductsPage extends React.Component {
     };
   }
 
+  removeFromCart = (product) => {
+    const cartItems = this.state.cartItems.slice();
+    this.setState({
+      cartItems: cartItems.filter((x) => x._id !== product._id),
+    });
+  };
+
   addToCart = (product) => {
     const cartItems = this.state.cartItems.slice();
     let alreadyInCart = false;
@@ -102,7 +109,10 @@ class ProductsPage extends React.Component {
             </MainContent>
 
             <Sidebar>
-              <Cart cartItems={this.state.cartItems} />
+              <Cart
+                cartItems={this.state.cartItems}
+                removeFromCart={this.removeFromCart}
+              />
             </Sidebar>
           </Content>
         </Main>

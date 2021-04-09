@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import formatCurrency from './util';
 export default class Cart extends Component {
   render() {
     const { cartItems } = this.props;
@@ -23,9 +23,15 @@ export default class Cart extends Component {
                   </div>
                   <div>
                     <div>{item.title}</div>
-                    <button onClick={() => this.props.removeFromCart(item)}>
-                      Remove
-                    </button>
+                    <div className='right'>
+                      {formatCurrency(item.price)} x {item.count}{' '}
+                      <button
+                        className='button'
+                        onClick={() => this.props.removeFromCart(item)}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 </li>
               ))}
@@ -45,5 +51,31 @@ const Container = styled.div`
   }
   .cart-header {
     border-bottom: 0.1rem #c0c0c0 solid;
+  }
+
+  .cart-items {
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+  }
+
+  .cart-items img {
+    width: 5rem;
+  }
+
+  .cart-items li {
+    display: flex;
+  }
+
+  .cart-items li div {
+    padding: 0.5rem;
+  }
+
+  .cart-items li div:last-child {
+    flex: 1;
+  }
+
+  .right {
+    text-align: right;
   }
 `;
