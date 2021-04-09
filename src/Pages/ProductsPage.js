@@ -5,16 +5,45 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Products from '../components/Products';
 import Filter from '../components/Filter';
+import Cart from '../components/Cart';
 
 class ProductsPage extends React.Component {
   constructor() {
     super();
     this.state = {
       products: data.products,
+      cartItems: [],
       size: '',
       sort: '',
     };
   }
+
+  removeFromCart = (product) => {
+    const cartItems = this.state.cartItems.slice();
+    this.setState({
+      cartItems: cartItems.filter((x) => x._id !== product._id),
+    });
+  };
+
+  addToCart = (product) => {
+    const cartItems = this.state.cartItems.slice();
+    let alreadyInCart = false;
+    cartItems.forEach((item) => {
+      if (item.id === product._id) {
+        item.count++;
+        alreadyInCart = true;
+      }
+    });
+    if (!alreadyInCart) {
+      cartItems.push({ ...product, count: 1 });
+    }
+
+    this.setState({ cartItems });
+  };
+
+  a = () => {
+    console.log('test');
+  };
 
   sortProducts = (event) => {
     const sort = event.target.value;
@@ -73,10 +102,18 @@ class ProductsPage extends React.Component {
                 filterProducts={this.filterProducts}
                 sortProducts={this.sortProducts}
               />
-              <Products products={this.state.products} />
+              <Products
+                products={this.state.products}
+                addToCart={this.addToCart}
+              />
             </MainContent>
 
-            <Sidebar>Cart Items</Sidebar>
+            <Sidebar>
+              <Cart
+                cartItems={this.state.cartItems}
+                removeFromCart={this.removeFromCart}
+              />
+            </Sidebar>
           </Content>
         </Main>
         <Footer className='footer' />

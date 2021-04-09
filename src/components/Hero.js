@@ -24,8 +24,8 @@ function Hero({ closeBurger, closeUserMenu }) {
   //  it won't show the hero section!!!
 
   return (
-    <Container onClick={closeBurger} onClick={closeUserMenu}>
-      <Arrows onClick={closeBurger}>
+    <Container onClick={closeUserMenu}>
+      <Arrows>
         <ArrowForwardIosIcon className='left' onClick={prevSlide} />
         <ArrowForwardIosIcon className='right' onClick={nextSlide} />
       </Arrows>
@@ -42,7 +42,6 @@ function Hero({ closeBurger, closeUserMenu }) {
         <Product
           className={index === current ? 'slide-active' : 'slide'}
           key={index}
-          onClick={closeBurger}
         >
           {/* {item.img.map((image) => (
             <ProductImg>
@@ -126,21 +125,21 @@ const Arrows = styled.div`
   }
 `;
 
-const ProductImg = styled.div`
-  border: 2px solid rgba(217, 200, 180, 0.75);
-  border-radius: 15px;
-  margin-left: 50px;
-  margin-right: 10px;
-  padding: 5px 5px 5px 5px;
+// const ProductImg = styled.div`
+//   border: 2px solid rgba(217, 200, 180, 0.75);
+//   border-radius: 15px;
+//   margin-left: 50px;
+//   margin-right: 10px;
+//   padding: 5px 5px 5px 5px;
 
-  img {
-    max-width: 100%;
-    height: auto;
-    max-height: 500px;
-    margin-bottom: -4px;
-    border-radius: 15px;
-  }
-`;
+//   img {
+//     max-width: 100%;
+//     height: auto;
+//     max-height: 500px;
+//     margin-bottom: -4px;
+//     border-radius: 15px;
+//   }
+// `;
 
 const Product = styled.div`
   display: flex;
@@ -207,24 +206,24 @@ const Price = styled.h2`
   }
 `;
 
-const ImgGalery = styled.div`
-  padding-top: 30px;
+// const ImgGalery = styled.div`
+//   padding-top: 30px;
 
-  img {
-    max-width: 15%;
-    height: auto;
-    border: 2px solid rgba(217, 200, 180, 0.75);
-    border-radius: 15px;
-    padding: 2px 2px 2px 2px;
-    transition: ease-in-out 0.15s;
-    cursor: pointer;
-    :hover {
-      background: rgba(255, 238, 238, 0.15);
-      border: solid 2px rgba(255, 238, 238, 1);
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    }
-  }
-`;
+//   img {
+//     max-width: 15%;
+//     height: auto;
+//     border: 2px solid rgba(217, 200, 180, 0.75);
+//     border-radius: 15px;
+//     padding: 2px 2px 2px 2px;
+//     transition: ease-in-out 0.15s;
+//     cursor: pointer;
+//     :hover {
+//       background: rgba(255, 238, 238, 0.15);
+//       border: solid 2px rgba(255, 238, 238, 1);
+//       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+//     }
+//   }
+// `;
 
 const BuyButton = styled.button`
   margin-top: 50px;
