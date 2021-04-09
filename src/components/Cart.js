@@ -41,6 +41,7 @@ export default class Cart extends Component {
             <div className='cart'>
               <div className='total'>
                 <div>
+                  Total:{' '}
                   {formatCurrency(
                     cartItems.reduce((a, c) => a + c.price * c.count, 0)
                   )}
@@ -87,7 +88,34 @@ const Container = styled.div`
     flex: 1;
   }
 
+  .button,
+  .button-primary {
+    margin-top: 10px;
+    background: #ffeeee;
+    color: #4d3728;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    width: 70px;
+  }
+
   .right {
     text-align: right;
+  }
+
+  .total {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .total > div {
+    font-size: 1.5rem;
+  }
+
+  .total > div,
+  .total > button {
+    flex: 1;
+    align-items: center;
   }
 `;
